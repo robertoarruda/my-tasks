@@ -25,7 +25,7 @@ $app = new Laravel\Lumen\Application(
 
 // $app->withFacades();
 
-// $app->withEloquent();
+$app->withEloquent();
 
 /*
 |--------------------------------------------------------------------------
@@ -45,7 +45,7 @@ $app->singleton(
 
 $app->singleton(
     Illuminate\Contracts\Console\Kernel::class,
-    App\Console\Kernel::class
+    MyTasks\Console\Kernel::class
 );
 
 /*
@@ -82,6 +82,7 @@ $app->singleton(
 // $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
 
+$app->register(MyTasks\Providers\AppServiceProvider::class);
 $app->register(Appzcoder\LumenRoutesList\RoutesCommandServiceProvider::class);
 $app->register(Prettus\Repository\Providers\LumenRepositoryServiceProvider::class);
 
@@ -97,7 +98,7 @@ $app->register(Prettus\Repository\Providers\LumenRepositoryServiceProvider::clas
  */
 
 $app->router->group([
-    'namespace' => 'App\Http\Controllers',
+    'namespace' => 'MyTasks\Http\Controllers',
 ], function ($router) {
     require __DIR__ . '/../routes/web.php';
 });
