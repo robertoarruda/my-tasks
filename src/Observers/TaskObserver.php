@@ -39,6 +39,8 @@ class TaskObserver
         $task->uuid = self::$uuid;
 
         self::$uuid = '';
+
+        app(TaskService::class)->reorder($task, 'increment');
     }
 
     /**
@@ -47,9 +49,9 @@ class TaskObserver
      * @param  \MyTasks\Models\Task  $task
      * @return void
      */
-    public function saved(Task $task): void
+    public function updated(Task $task): void
     {
-        app(TaskService::class)->reorder($task, 'increment');
+        app(TaskService::class)->reorderInterval($task, $task->getOriginal('sort_order', 0));
     }
 
     /**

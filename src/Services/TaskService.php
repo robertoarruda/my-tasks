@@ -62,4 +62,29 @@ class TaskService implements CrudInterface
             $task->$action('sort_order');
         }
     }
+
+    /**
+     * Reordena os registro do intervalo pelo campo sort_order
+     *
+     * @param \MyTasks\Models\Task $task
+     * @param int $oldSortOrder
+     * @return void
+     */
+    public function reorderInterval(Task $task, int $oldSortOrder): void
+    {
+        $between = [$task->sort_order, $oldSortOrder];
+        asort($between);
+
+        $tasks = $this->repository->makeModel()
+            ->orderBy('sort_order')
+            ->where('uuid', '<>', $task->uuid)
+            ->whereBetween('sort_order', $between)
+            ->get();
+
+        $action = ($task->sort_order < $oldSortOrder) ? 'increment' : 'decrement';
+
+        foreach ($tasks as $task) {
+            $task->$action('sort_order');
+        }
+    }
 }
