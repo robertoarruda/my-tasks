@@ -15,19 +15,21 @@ use Prettus\Repository\Eloquent\BaseRepository;
 class TaskRepositoryEloquent extends BaseRepository implements TaskRepository
 {
     /**
-     * Specify Model class name
+     * Especifica a Model class name
      *
      * @return string
      */
-    public function model()
+    public function model(): string
     {
         return Task::class;
     }
 
     /**
-     * Boot up the repository, pushing criteria
+     * Inicialize o repositório com os critérios
+     *
+     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }

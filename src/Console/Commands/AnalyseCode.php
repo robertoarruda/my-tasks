@@ -9,25 +9,26 @@ use Symfony\Component\Process\Process;
 class AnalyseCode extends Command
 {
     /**
-     * The name and signature of the console command.
+     * Nome e assinatura do console command
      *
      * @var string
      */
     protected $signature = 'code:analyse';
 
     /**
-     * The console command description.
+     * Descrição do console command
      *
      * @var string
      */
     protected $description = 'Executa o phpstan para análise do código';
 
     /**
-     * Execute the console command.
+     * Executa o console command
      *
-     * @return mixed
+     * @return void
+     * @throws Symfony\Component\Process\Exception\ProcessFailedException
      */
-    public function handle()
+    public function handle(): void
     {
         $process = new Process('./vendor/bin/phpstan analyse -l 4 -c phpstan.neon ./src');
         $process->run();

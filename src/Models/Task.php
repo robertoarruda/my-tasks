@@ -3,14 +3,14 @@
 namespace MyTasks\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use MyTasks\Traits\Uuid;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 
 class Task extends Model implements Transformable
 {
-    use Uuid;
     use TransformableTrait;
+    use SoftDeletes;
 
     /**
      * Define o campo "created at"
@@ -32,6 +32,13 @@ class Task extends Model implements Transformable
      * @var string
      */
     protected $primaryKey = 'uuid';
+
+    /**
+     * Define os atributos que devem ser transformados em datas
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
 
     /**
      * Define os atributos que são atribuíveis em massa

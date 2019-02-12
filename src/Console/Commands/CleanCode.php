@@ -9,25 +9,26 @@ use Symfony\Component\Process\Process;
 class CleanCode extends Command
 {
     /**
-     * The name and signature of the console command.
+     * Nome e assinatura do console command
      *
      * @var string
      */
     protected $signature = 'code:check';
 
     /**
-     * The console command description.
+     * Descrição do console command
      *
      * @var string
      */
     protected $description = 'Execute o comando pmd';
 
     /**
-     * Execute the console command.
+     * Executa o console command
      *
-     * @return mixed
+     * @return void
+     * @throws Symfony\Component\Process\Exception\ProcessFailedException
      */
-    public function handle()
+    public function handle(): void
     {
         $process = new Process('./vendor/bin/phpmd ./src/ text phpmd.xml');
         $process->run();

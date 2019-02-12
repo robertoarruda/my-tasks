@@ -2,6 +2,8 @@
 
 namespace MyTasks\Services;
 
+use ErrorException;
+use Exception;
 use Illuminate\Support\Collection;
 use MyTasks\Models\Task;
 use MyTasks\Repositories\TaskRepository;
@@ -23,7 +25,8 @@ class TaskService
     /**
      * Lista todas as tarefas
      *
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @return \Illuminate\Support\Collection
+     * @throws \ErrorException
      */
     public function all(): Collection
     {
@@ -68,10 +71,27 @@ class TaskService
      * Exclui uma tarefa a partir do id
      *
      * @param string $uuid
-     * @return bool
+     * @return int
      */
-    public function delete(string $uuid): bool
+    public function delete(string $uuid): int
     {
         return $this->taskRepository->delete($uuid);
+    }
+
+    /**
+     * Verifica se o uuid existe
+     *
+     * @param string $uuid
+     * @return bool
+     */
+    public function checkUuid(string $uuid): bool
+    {
+        try {
+            $task = $this->taskRepository->find($uuid);
+        } catch (Exception $e) {
+            return false;
+        }
+
+        return true;
     }
 }

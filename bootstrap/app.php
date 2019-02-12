@@ -40,7 +40,7 @@ $app->withEloquent();
 
 $app->singleton(
     Illuminate\Contracts\Debug\ExceptionHandler::class,
-    App\Exceptions\Handler::class
+    MyTasks\Exceptions\Handler::class
 );
 
 $app->singleton(
@@ -85,6 +85,7 @@ $app->singleton(
 $app->register(MyTasks\Providers\AppServiceProvider::class);
 $app->register(Appzcoder\LumenRoutesList\RoutesCommandServiceProvider::class);
 $app->register(Prettus\Repository\Providers\LumenRepositoryServiceProvider::class);
+$app->register(Pearl\RequestValidate\RequestServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
