@@ -27,7 +27,7 @@ class Task extends RequestAbstract
         return [
             'type' => new TaskType,
             'content' => 'required',
-            'sort_order' => 'sometimes|int',
+            'sort_order' => 'sometimes|int|min:1',
             'done' => 'sometimes|boolean',
         ];
     }

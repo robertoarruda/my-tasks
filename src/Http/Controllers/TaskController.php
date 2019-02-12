@@ -42,7 +42,7 @@ class TaskController extends Controller
             throw new ErrorException('Are you a hacker or something? The task you were trying to get doesn\'t exist.', 400);
         }
 
-        return $service->find($uuid);
+        return $service->read($uuid);
     }
 
     /**
