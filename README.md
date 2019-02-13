@@ -25,3 +25,8 @@ Execute o comando abaixo para listar os endpoints da API:
 ```
 php artisan route:list
 ```
+
+## Observações
+Todo código está em `./src`.
+
+O arquivo refatorado está em `./CreditCard.php`.
